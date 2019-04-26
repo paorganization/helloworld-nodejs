@@ -13,6 +13,18 @@ pipeline {
         container('nodejs') {
           echo 'Hello World!'   
           sh 'node --version'
+          sh 'pwd'
+          sh 'ls'
+        }
+      }
+    }
+    stage('build') {
+      steps {
+        container('nodejs') {
+          echo 'Hello World!'   
+          sh 'node --version'
+          sh 'pwd'
+          sh 'ls'
         }
       }
     }
