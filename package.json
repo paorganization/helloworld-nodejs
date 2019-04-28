@@ -1,0 +1,34 @@
+{
+  "name": "hello_node",
+  "version": "1.0.0",
+  "description": "node application for testing Jenkins pipeline",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weimingyan/hello_node.git"
+  },
+  "keywords": [
+    "test"
+  ],
+  "devDependencies": {
+    "jest": "^23.6.0"
+  },
+  "dependencies": {},
+  "jest": {
+    "coverageDirectory": "coverage",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "text-summary",
+      "html"
+    ]
+  },
+  "author": "weiming.yan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weimingyan/hello_node/issues"
+  },
+  "homepage": "https://github.com/weimingyan/hello_node#readme"
+}
