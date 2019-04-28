@@ -37,6 +37,10 @@ pipeline {
         beforeAgent true
         branch 'master'
       }
+      options {
+        timeout(time: 20, unit: 'SECONDS') 
+      }
+      
       input {
         message "Should we continue?"
       }
