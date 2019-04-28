@@ -13,7 +13,6 @@ pipeline {
         container('nodejs') {
           echo 'Hello World!'   
           sh 'node --version'
-          sh 'npm install'
           sh 'npm test'
         }
       }
