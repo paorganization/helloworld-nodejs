@@ -1,5 +1,10 @@
 pipeline {
-  agent { label 'nodejs-app' }
+  agent {
+    kubernetes {
+      label 'nodejs-app-pod-2'
+      yamlFile 'nodejs-pod.yml'
+    }
+  }
   options { 
     buildDiscarder(logRotator(numToKeepStr: '2'))
     skipDefaultCheckout true
@@ -7,12 +12,7 @@ pipeline {
   
   stages {
     stage('Test') {
-      agent {
-        kubernetes {
-          label 'nodejs-app-pod'
-          yamlFile 'nodejs-pod.yml'
-        }
-      }
+
       steps {
         checkout scm
         sh 'java -version'
