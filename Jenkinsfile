@@ -13,8 +13,8 @@ pipeline {
         container('nodejs') {
           echo 'Hello World!'   
           sh 'node --version'
-          sh 'pwd'
-          sh 'ls'
+          sh 'npm install'
+          sh 'npm test'
         }
       }
     }
@@ -23,8 +23,7 @@ pipeline {
         container('nodejs') {
           echo 'Hello World!'   
           sh 'node --version'
-          sh 'pwd'
-          sh 'ls'
+          sh 'npm test'
         }
       }
     }
