@@ -13,6 +13,7 @@ pipeline {
         container('nodejs') {
           echo 'Hello World!'   
           sh 'node --version'
+          sh 'touch weiming.test'
           sh 'npm test'
         }
       }
@@ -22,6 +23,7 @@ pipeline {
         container('nodejs') {
           echo 'Hello World!'   
           sh 'node --version'
+          sh 'ls -l weiming.test'
           sh 'npm test'
         }
       }
