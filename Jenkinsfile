@@ -11,8 +11,12 @@ pipeline {
                     accessKeyVariable: 'AWS_ACCESS_KEY_ID',
                     secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
                 ]]) {
-                    sh 'echo $AWS_ACCESS_KEY_ID'
                     container('dind') {
+                        sh "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+                        AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+                        AWS_REGION=us-east-1 \
+                        aws ecr get-login --no-include-email --region us-east-1"
+                        
                         sh 'which dockerd'
                         sh 'dockerd &'
                         sh 'apk add --update curl python3'
