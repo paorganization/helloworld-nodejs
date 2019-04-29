@@ -5,8 +5,11 @@ pipeline {
         stage ('docker build testing') {
             steps {
                 container('dind') {
-                    sh 'ps aux'
-                    sh 'docker info'
+                    scripts {
+                        ps aux
+                        sleep 30
+                        docker info
+                    }
                 }
             }
         }
