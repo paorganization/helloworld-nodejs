@@ -1,9 +1,13 @@
-podTemplate(){
-    node('pod-dind') {
-        container('dind') {
-            stage('Build My Docker Image') { 
-                sh 'docker info'
-            } 
+pipeline {
+    agent { label 'pod-dind'}
+    
+    stages {
+        stage {
+            steps {
+                container('dind') {
+                    sh 'docker info'
+                }
+            }
         }
     }
 }
