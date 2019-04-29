@@ -11,8 +11,11 @@ pipeline {
   }
   
   stages {
-    stage('Test') {
-
+    stage('Test, happens in pull request') {
+      when {
+        beforeAgent true
+        changeRequest target: 'master' 
+      }
       steps {
         checkout scm
         sh 'java -version'
@@ -23,31 +26,35 @@ pipeline {
       }
     }
     
-    stage('Build and Push Image') {
-      when {
-         beforeAgent true
-         branch 'master'
-      }
-      steps {
-         echo "TODO - build and push image"
-      }
-    }
-    stage('Deploy') {
-      when {
+    stage('this stage happens in master branch') {
+      when { 
         beforeAgent true
         branch 'master'
       }
-      options {
-        timeout(time: 20, unit: 'SECONDS') 
+      steps {
+         echo "this stage happens in pull request or not master branch"
       }
-      
-      input {
-        message "Should we continue?"
+    }
+    stage('this stage happens only in pull request') {
+      when {
+        beforeAgent true
+        changeRequest target: 'master' 
       }
       steps {
-        echo "Continuing with deployment"
+        echo "this stage happens only in pull request"
       }
     }
     
+    stage('this stage happens only in not master branch') {
+      when {
+        beforeAgent true
+        not {
+          branch 'master'
+        }
+      }
+      steps {
+        echo "this stage happens only in not master branch"
+      }
+    }    
   }
 }
