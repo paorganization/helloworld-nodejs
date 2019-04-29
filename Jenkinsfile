@@ -9,7 +9,6 @@ pipeline {
                     sh 'sleep 30'
                     sh 'ps aux'
                     sh 'docker info'
-                    }
                 }
             }
         }
