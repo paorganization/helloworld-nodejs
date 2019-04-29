@@ -1,4 +1,6 @@
 pipeline {
+  agent any
+  
   stages {
     stage('test: whenever change happens') {
       steps {
