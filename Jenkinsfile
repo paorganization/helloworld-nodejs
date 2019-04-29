@@ -10,8 +10,8 @@ pipeline {
       }
       steps {
         container('nodejs') {
-          sh 'node install'
-          sh 'node test'
+          sh 'npm install'
+          sh 'npm test'
         }
       }
     }
