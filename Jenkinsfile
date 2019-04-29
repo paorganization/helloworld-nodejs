@@ -2,7 +2,7 @@ pipeline {
     agent { label 'pod-dind'}
     
     stages {
-        stage {
+        stage ('docker build testing') {
             steps {
                 container('dind') {
                     sh 'docker info'
