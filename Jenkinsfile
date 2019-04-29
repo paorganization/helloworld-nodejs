@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'nodejs-app'}
+  agent { label 'docker-dind'}
   options { 
     buildDiscarder(logRotator(numToKeepStr: '2'))
   }
@@ -7,8 +7,8 @@ pipeline {
   stages {
     stage('1. Test, happens in pull request') {
       steps {
-        container('nodejs'){
-          sh 'node --version'
+        container('dind'){
+          sh 'docker info'
         }
       }
     }
