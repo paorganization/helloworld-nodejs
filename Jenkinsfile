@@ -5,7 +5,7 @@ pipeline {
         stage ('docker build testing') {
             steps {
                 container('dind') {
-                    sh 'dockerd'
+                    sh 'which dockerd'
                     sh 'docker info'
                 }
             }
