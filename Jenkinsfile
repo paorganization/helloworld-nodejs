@@ -3,14 +3,14 @@ pipeline {
     
     stages {
         stage ('docker build testing') {
-            withCredentials(
-            [[
-                $class: 'AmazonWebServicesCredentialsBinding',
-                credentialsId: 'aws-ecr-credential',  // ID of credentials in Jenkins
-                accessKeyVariable: 'AWS_ACCESS_KEY_ID',
-                secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
-            ]]) {
-                steps {
+            steps {
+                withCredentials(
+                [[
+                    $class: 'AmazonWebServicesCredentialsBinding',
+                    credentialsId: 'aws-ecr-credential',  // ID of credentials in Jenkins
+                    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+                    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]]) {
                     sh 'echo $AWS_ACCESS_KEY_ID'
                     container('dind') {
                         sh 'which dockerd'
@@ -23,7 +23,6 @@ pipeline {
                     }
                 }
             }
-            
         }
     }
 }
