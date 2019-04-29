@@ -2,8 +2,8 @@ pipeline {
   agent none
   
   stages {
-    agent { label 'nodejs-app'}
     stage('test: whenever change happens') {
+      agent { label 'nodejs-app'}
       when {
         beforeAgent true
         not { branch 'master'}
