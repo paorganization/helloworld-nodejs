@@ -1,28 +1,19 @@
 pipeline {
-  agent {
-    kubernetes {
-      label 'nodejs-app-pod-2'
-      yamlFile 'nodejs-pod.yml'
-    }
-  }
+  agent none
   options { 
     buildDiscarder(logRotator(numToKeepStr: '2'))
   }
   
   stages {
     stage('1. Test, happens in pull request') {
+      agent pod-dind
       steps {
         sh 'printenv'
         sh 'echo $GIT_COMMIT'
+        container('pod-dind'){
+          sh 'docker info'
+        }
       }
     }
-    
-    stage('2. Test, happens in pull request') {
-      steps {
-        sh 'printenv'
-        sh 'echo $GIT_COMMIT'
-      }
-    }
-    
   }
 }
