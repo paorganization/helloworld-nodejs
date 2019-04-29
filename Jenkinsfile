@@ -6,7 +6,7 @@ pipeline {
   
   stages {
     stage('1. Test, happens in pull request') {
-      agent { label: 'pod-dind'}
+      agent { label: 'nodejs-app'}
       steps {
         container('pod-dind'){
           sh 'docker info'
