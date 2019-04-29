@@ -1,0 +1,32 @@
+{
+  "name": "hellonode",
+  "version": "1.0.0",
+  "description": "this is for gitlab ci pipeline testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@poweradv-dev43:weiming/hellonode.git"
+  },
+  "keywords": [
+    "test"
+  ],
+  "devDependencies": {
+    "jest": "^23.6.0"
+  },
+  "dependencies": {},
+  "jest": {
+    "coverageDirectory": "coverage",
+    "collectCoverage": true,
+    "coverageReporters": [
+      "text-summary",
+      "html"
+    ]
+  },
+  "author": "weiming.yan",
+  "comments": "feature3 changed",
+  "license": "UNLICENSED"
+}
+
