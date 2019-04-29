@@ -6,6 +6,7 @@ pipeline {
             steps {
                 container('dind') {
                     sh 'which dockerd'
+                    sh 'dockerd &'
                     sh 'docker info'
                 }
             }
