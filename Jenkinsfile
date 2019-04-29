@@ -3,6 +3,10 @@ pipeline {
   
   stages {
     stage('test: whenever change happens') {
+      when {
+        beforeAgent true
+        not { branch 'master'}
+      }
       steps {
         sh 'echo "test"'
       }
