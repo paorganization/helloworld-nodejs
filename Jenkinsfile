@@ -7,7 +7,7 @@ pipeline {
                 container('dind') {
                     scripts {
                         ps aux
-                        sleep 30
+                       
                         docker info
                     }
                 }
