@@ -29,7 +29,7 @@ pipeline {
     stage('2. this stage happnes no matter what') {
       steps {
         echo "this stage happnes no matter what"
-        sh 'echo $GIT_COMMIT'
+        sh 'printenv | grep -i GIT'
       }
     }
     
