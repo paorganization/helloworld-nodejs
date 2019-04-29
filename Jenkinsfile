@@ -1,5 +1,5 @@
 pipeline {
-  agent { label: 'nodejs-app'}
+  agent { label 'nodejs-app'}
   options { 
     buildDiscarder(logRotator(numToKeepStr: '2'))
   }
