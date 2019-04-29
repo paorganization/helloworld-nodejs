@@ -1,14 +1,18 @@
 pipeline {
-  agent any
+  agent none
   
   stages {
+    agent { label 'nodejs-app'}
     stage('test: whenever change happens') {
       when {
         beforeAgent true
         not { branch 'master'}
       }
       steps {
-        sh 'echo "test"'
+        container('nodejs') {
+          sh 'node install'
+          sh 'node test'
+        }
       }
     }
     
