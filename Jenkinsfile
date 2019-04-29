@@ -7,13 +7,23 @@ pipeline {
   }
   options { 
     buildDiscarder(logRotator(numToKeepStr: '2'))
+    skipDefaultCheckout true
   }
   
   stages {
     stage('1. Test, happens in pull request') {
       steps {
         sh 'printenv'
+        checkout scm
+        sh 'printenv'
       }
     }
+    
+    stage('2. Test, happens in pull request') {
+      steps {
+        sh 'printenv'
+      }
+    }
+    
   }
 }
