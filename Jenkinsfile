@@ -28,7 +28,8 @@ pipeline {
     
     stage('2. this stage happnes no matter what') {
       steps {
-         echo "this stage happnes no matter what"
+        echo "this stage happnes no matter what"
+        echo ${GIT_COMMIT}
       }
     }
     
