@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('test: whenever change happens') {
       when {
-        beforeAgent
+        beforeAgent true
         not { branch 'master'}
       }
       steps {
