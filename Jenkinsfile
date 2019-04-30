@@ -33,7 +33,8 @@ pipeline {
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
           container('dind') {
-            sh 'printenv'
+            sh 'printenv' 
+            sh 'echo $GIT_COMMIT'
             // sh 'ls -l'
             // sh 'which dockerd'
             // sh 'dockerd &'
