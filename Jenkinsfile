@@ -9,6 +9,7 @@ pipeline {
         not { branch 'master'}
       }
       steps {
+        sh 'echo "test"'
         container('nodejs') {
           sh 'npm install'
           sh 'npm test'
