@@ -51,6 +51,7 @@ pipeline {
     }
     
     stage('deploy: pull docker image from AWS ECR') {
+      agent { label 'pod-dind'}
       when {
         beforeAgent true
         changeRequest target: 'master' 
