@@ -34,9 +34,6 @@ pipeline {
         ]]) {
           container('dind') {
             sh 'printenv' 
-            sh 'echo $GIT_COMMIT'
-            sh 'ls -l'
-            sh 'which dockerd'
             sh 'dockerd &'
             sh 'apk add --update curl python3'
             sh 'curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"'
@@ -63,6 +60,21 @@ pipeline {
       }
       steps {
         sh 'echo deploy: pulling docker image'
+        container('dind') {
+          sh 'dockerd &'
+          sh 'apk add --update curl python3'
+          sh 'curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"'
+          sh 'unzip awscli-bundle.zip'
+          sh 'python3 awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws'
+          sh 'aws --version'
+          sh "`AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} \
+          AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} \
+          AWS_REGION=us-east-1 \
+          aws ecr get-login --no-include-email --region us-east-1`"
+          sh 'docker pull 781074499793.dkr.ecr.us-east-1.amazonaws.com/ci-jenkins-node:$GIT_COMMIT'
+          sh 'docker tag ci-jenkins-node:$GIT_COMMIT 781074499793.dkr.ecr.us-east-1.amazonaws.com/ci-jenkins-node:latest'
+          sh 'docker push 781074499793.dkr.ecr.us-east-1.amazonaws.com/ci-jenkins-node:$GIT_COMMIT'
+        }
       }
     }
     
