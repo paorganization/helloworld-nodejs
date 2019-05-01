@@ -79,8 +79,8 @@ pipeline {
             AWS_REGION=us-east-1 \
             aws ecr get-login --no-include-email --region us-east-1`"
             sh 'docker pull 781074499793.dkr.ecr.us-east-1.amazonaws.com/ci-jenkins-node:$GIT_COMMIT'
-            sh 'docker tag $GIT_COMMIT 781074499793.dkr.ecr.us-east-1.amazonaws.com/ci-jenkins-node:latest'
-            sh 'docker push 781074499793.dkr.ecr.us-east-1.amazonaws.com/ci-jenkins-node:$GIT_COMMIT'
+            sh 'docker tag 781074499793.dkr.ecr.us-east-1.amazonaws.com/ci-jenkins-node:$GIT_COMMIT 781074499793.dkr.ecr.us-east-1.amazonaws.com/ci-jenkins-node:latest'
+            sh 'docker push 781074499793.dkr.ecr.us-east-1.amazonaws.com/ci-jenkins-node:latest'
           }
         }
       }
