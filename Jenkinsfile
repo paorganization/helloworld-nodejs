@@ -93,8 +93,10 @@ pipeline {
         beforeAgent true
         changeRequest target: 'master' 
       }
-      container('nodejs') {
-        sh 'echo "deploy"'
+      steps {
+        container('nodejs') {
+         sh 'echo "deploy"'
+        }
       }
     }
     
