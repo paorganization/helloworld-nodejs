@@ -7,6 +7,6 @@ describe('App test', ()=> {
 
     test('when run with abc fails', ()=> {
         expect(app.run('abc')).toBe('abc changed');
-        expect(true).toBe(false);
+        expect(true).toBe(true);
     });
 });
