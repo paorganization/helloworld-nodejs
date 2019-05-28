@@ -81,7 +81,6 @@ pipeline {
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
           container('dind') {
-            sh 'e2e test pass'
             sh 'dockerd &'
             sh 'apk add --update curl python3'
             sh 'curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"'
