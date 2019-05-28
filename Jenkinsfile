@@ -65,7 +65,7 @@ pipeline {
       }
     }
     
-    stage('deploy: pull docker image from AWS ECR') {
+    stage('e2e test: retag docker image') {
       agent { label 'pod-dind'}
       when {
         beforeAgent true
@@ -81,6 +81,7 @@ pipeline {
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
           container('dind') {
+            sh 'e2e test pass'
             sh 'dockerd &'
             sh 'apk add --update curl python3'
             sh 'curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"'
@@ -95,6 +96,19 @@ pipeline {
             sh 'docker tag 781074499793.dkr.ecr.us-east-1.amazonaws.com/ci-jenkins-node:$GIT_COMMIT 781074499793.dkr.ecr.us-east-1.amazonaws.com/ci-jenkins-node:latest'
             sh 'docker push 781074499793.dkr.ecr.us-east-1.amazonaws.com/ci-jenkins-node:latest'
           }
+        }
+      }
+    }
+    
+    stage('deploy') {
+      agent { label 'nodejs-app'}
+      when {
+        beforeAgent true
+        changeRequest target: 'master' 
+      }
+      steps {
+        container('nodejs') {
+         sh 'echo "deploy"'
         }
       }
     }
