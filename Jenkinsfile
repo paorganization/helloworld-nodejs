@@ -17,6 +17,19 @@ pipeline {
       }
     }
     
+    stage('Functest: runs when pull request happens') {
+      agent { label 'nodejs-app'}
+      when {
+        beforeAgent true
+        changeRequest target: 'master' 
+      }
+      steps {
+        container('nodejs') {
+          sh 'failcommand '
+        }
+      }
+    } 
+    
     stage('build docker image and push it to AWS ECR') {
       agent { label 'pod-dind'}
       when {
