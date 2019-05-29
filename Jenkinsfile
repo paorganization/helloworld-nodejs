@@ -17,7 +17,20 @@ pipeline {
       }
     }
     
-    stage('build： docker image and push it to AWS ECR') {
+    stage('Functest: runs when pull request happens') {
+      agent { label 'nodejs-app'}
+      when {
+        beforeAgent true
+        changeRequest target: 'master' 
+      }
+      steps {
+        container('nodejs') {
+          sh 'echo "Success"'
+        }
+      }
+    } 
+    
+    stage('build docker image and push it to AWS ECR') {
       agent { label 'pod-dind'}
       when {
         beforeAgent true
@@ -68,7 +81,6 @@ pipeline {
             secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
         ]]) {
           container('dind') {
-            sh 'e2e test pass'
             sh 'dockerd &'
             sh 'apk add --update curl python3'
             sh 'curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"'
