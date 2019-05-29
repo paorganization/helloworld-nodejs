@@ -25,7 +25,7 @@ pipeline {
       }
       steps {
         container('nodejs') {
-          sh 'echo "success"'
+          sh 'makePullRequestFailedCommand'
         }
       }
     } 
