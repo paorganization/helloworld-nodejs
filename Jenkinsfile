@@ -25,7 +25,7 @@ pipeline {
       }
       steps {
         container('nodejs') {
-          sh 'MakePipelineFailsCommand'
+          sh 'echo "success"'
         }
       }
     } 
